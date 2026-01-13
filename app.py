@@ -46,7 +46,8 @@ WQI_STANDARDS = {
         "EC":           {"Sn": 3,    "Vid": 0,   "type": "normal"},
         "SAR":          {"Sn": 18,   "Vid": 0,   "type": "normal"},
         "Nitrates":     {"Sn": 30,   "Vid": 0,   "type": "normal"},
-        "Chlorides":    {"Sn": 350,  "Vid": 0,   "type": "normal"}
+        "Chlorides":    {"Sn": 350,  "Vid": 0,   "type": "normal"},
+        "Turbidity":    {"Sn": 50,   "Vid": 0,   "type": "normal"}
     },
     "Mining": {
         "pH":           {"Sn_max": 9.0, "Sn_min": 6.0, "Vid": 7.0, "type": "range"},
@@ -54,7 +55,8 @@ WQI_STANDARDS = {
         "TSS":          {"Sn": 50,   "Vid": 0,   "type": "normal"},
         "Turbidity":    {"Sn": 50,   "Vid": 0,   "type": "normal"},
         "Iron":         {"Sn": 2.0,  "Vid": 0,   "type": "normal"},
-        "Sulphates":    {"Sn": 1000, "Vid": 0,   "type": "normal"}
+        "Sulphates":    {"Sn": 1000, "Vid": 0,   "type": "normal"},
+        "EC":           {"Sn": 200,  "Vid": 0,   "type": "normal"}
     }
 }
 
@@ -459,4 +461,5 @@ if st.session_state.baseline_forecast is not None:
             st.plotly_chart(fig2, use_container_width=True)
 
 else:
+
     st.info("Please run Step 2 (Baseline Forecast) first.")
