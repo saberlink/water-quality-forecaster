@@ -13,7 +13,7 @@ from sklearn.preprocessing import MinMaxScaler
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-st.set_page_config(page_title="Smart Water AI: Forecast & Simulate", layout="wide", page_icon="💧")
+st.set_page_config(page_title="Water Quality Forecaster & XAI Insights Application", layout="wide")
 
 # --- 1. GLOBAL CONSTANTS ---
 SEQUENCE_LENGTH = 30
@@ -21,7 +21,7 @@ TARGET_COLS = ['Turbidity', 'EC']
 
 # - Exact Defaults
 DEFAULTS = {
-    'pH': 7.0, 'Temperature': 20.0, 'Rainfall': 0.0, 
+    'pH': 7.0, 'Temperature': 25.0, 'Rainfall': 0.0, 
     'EC': 0.0, 'Turbidity': 0.0, 
     'Watercourse_Level': 0.0, 'Watercourse_Discharge': 0.0
 }
@@ -246,7 +246,7 @@ def run_prediction_loop(model, clean_df, eng_df, days, scaler_X, scaler_y, featu
 
 # --- 3. MAIN APPLICATION UI ---
 
-st.title("💧 Smart Water AI: Forecast & Simulate")
+st.title("Water Quality Forecaster & XAI Insights Application")
 
 with st.sidebar:
     st.header("1. Configuration")
@@ -265,7 +265,7 @@ if 'model_assets' not in st.session_state: st.session_state.model_assets = None
 # STEP 1: LOAD & VISUALIZE (Strict Match to App 9)
 # ==========================================
 st.header("Step 1: Process & Verify Data")
-if st.button("🚀 Process Data"):
+if st.button("Process Data"):
     if uploaded_files:
         with st.spinner('Processing...'):
             raw = process_uploaded_files(uploaded_files)
@@ -292,7 +292,7 @@ if st.button("🚀 Process Data"):
 st.divider()
 st.header("Step 2: Run Baseline AI Prediction")
 
-if st.button("🧠 Run Forecast"):
+if st.button("Run Forecast"):
     if st.session_state.clean_history is not None:
         with st.spinner('Forecasting...'):
             df = st.session_state.clean_history
@@ -358,7 +358,7 @@ if st.button("🧠 Run Forecast"):
 st.divider()
 st.header("Step 3: Explain Model Logic (XAI)")
 
-if st.button("🔎 Run SHAP Analysis"):
+if st.button("Run SHAP Analysis"):
     if st.session_state.model_assets is None:
         st.error("Please run Step 2 first.")
     else:
@@ -414,7 +414,7 @@ if st.session_state.baseline_forecast is not None:
     col1, col2 = st.columns([1, 2])
     
     with col1:
-        st.subheader("🛠️ Scenario Builder")
+        st.subheader("Scenario Builder")
         
         df_ref = st.session_state.clean_history
         # Only expose columns that actually exist in the strict 7-param limit of App 9
@@ -443,7 +443,7 @@ if st.session_state.baseline_forecast is not None:
 
     with col2:
         if 'sim_results' in st.session_state:
-            st.subheader("📊 Scenario Comparison")
+            st.subheader("Scenario Comparison")
             
             baseline = st.session_state.baseline_forecast
             simulated = st.session_state.sim_results
@@ -463,3 +463,4 @@ if st.session_state.baseline_forecast is not None:
 else:
 
     st.info("Please run Step 2 (Baseline Forecast) first.")
+
